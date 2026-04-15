@@ -2,9 +2,10 @@ import userModel from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 
+// register
 const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role="user" } = req.body;
 
     // validation
     if (!name || !email || !password) {
@@ -30,7 +31,8 @@ const register = async (req, res) => {
     const user = await userModel.create({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      role
     });
 
     return res.status(201).json({
@@ -48,6 +50,8 @@ const register = async (req, res) => {
 };
 
 
+
+// login
 const login = async (req, res) => {
   try {
     const {email, password } = req.body;
@@ -100,14 +104,14 @@ const login = async (req, res) => {
   }
 };
 
-
+// logout
 const logout = async(req, res) =>{
   try {
     const token = req.cookies.Token
     if(!token){
       return res.status(409).json({
         success:false,
-        message:"U haven't Login!"
+        message:"You are already Loout!"
       })
     }
     

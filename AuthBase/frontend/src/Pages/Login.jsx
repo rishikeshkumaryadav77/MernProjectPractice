@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Register from "./Register.jsx";
 import { post } from "../services/ApiendPoints.js";
+import {toast} from 'react-hot-toast'
+import { useNavigate } from "react-router-dom";
 
 
 const Login =()=> {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,11 +22,17 @@ const Login =()=> {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData);
     try {
       const request = await post('/api/auth/login', formData)
       const response = request.data
+      console.log(request)
       console.log(response)
+      if(request.status === 200){
+        toast.success(response.message)
+        navigate('/')
+      }
+      
+
     } catch (error) {
       console.log(error)
     }

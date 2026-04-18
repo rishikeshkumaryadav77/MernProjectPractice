@@ -4,6 +4,7 @@ import Home from "./Pages/Home"
 import Register from "./Pages/Register"
 import Login from "./Pages/Login"
 import Admin from "./Pages/Admin"
+import {Toaster} from "react-hot-toast"
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/register" element={<Register/>}/>

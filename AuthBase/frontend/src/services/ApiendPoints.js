@@ -9,7 +9,7 @@ const instance = axios.create({
 });
 
 // ✅ API methods
-export const get = (url, params) => instance.get(url, { params });
+export const get = (url) => instance.get(url);
 
 export const post = (url, data) => instance.post(url, data);
 

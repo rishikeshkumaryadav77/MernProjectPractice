@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { post } from "../services/ApiendPoints";
+import toast from "react-hot-toast";
  // adjust path if needed
 
 const Register =()=> {
@@ -40,7 +41,9 @@ const Register =()=> {
       setError("");
 
       const res = await post("/api/auth/register", formData);
-
+      if(res.status===201){
+        toast.success(res.data.message)
+      }
       
 
       // redirect to login

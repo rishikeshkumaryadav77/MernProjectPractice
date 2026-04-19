@@ -26,9 +26,10 @@ const Login =()=> {
       const request = await post('/api/auth/login', formData)
       const response = request.data
       console.log(request)
-      console.log(response)
+      console.log(response.token)
       if(request.status === 200){
         toast.success(response.message)
+        localStorage.setItem('token', response.token)
         navigate('/')
       }
       
